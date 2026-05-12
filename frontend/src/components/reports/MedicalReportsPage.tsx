@@ -582,7 +582,7 @@ export const MedicalReportsPage: React.FC = () => {
       return;
     }
 
-    toast.info('Retrying AI analysis...', { description: '🤖 Connecting to Gemini AI...' });
+    toast.info('Retrying AI analysis...', { description: '🤖 Connecting to Mistral AI...' });
 
     // Mark as analyzing
     updateReport(retryTargetReport.id, { status: 'analyzing' });

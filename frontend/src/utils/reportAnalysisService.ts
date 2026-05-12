@@ -1,7 +1,7 @@
 /**
  * Report Analysis Service
  * Proxies medical report analysis through the backend (Node.js/Express).
- * The Gemini API key lives ONLY on the server — never in the browser.
+ * The Mistral API key lives ONLY on the server — never in the browser.
  */
 
 import { API_BASE_URL, getAuthHeaders } from '../config/api';
@@ -35,8 +35,8 @@ export interface RiskFactor {
 }
 
 // Local UI cooldown — only set when the *server* itself returns 429
-// (meaning Gemini is exhausted even after server-side retries)
-const RATE_LIMIT_KEY = 'gemini-rate-limit-cooldown';
+// (meaning Mistral is exhausted even after server-side retries)
+const RATE_LIMIT_KEY = 'mistral-rate-limit-cooldown';
 const COOLDOWN_DURATION = 2 * 60 * 1000; // 2 minutes
 
 const isInCooldown = (): boolean => {
@@ -76,7 +76,7 @@ const fileToBase64 = (file: File): Promise<string> =>
 
 /**
  * Analyze a medical report PDF.
- * Sends the file to the backend, which calls Gemini with a server-side queue
+ * Sends the file to the backend, which calls Mistral with a server-side queue
  * and built-in retry logic — so the API key is never exposed in the browser.
  */
 export const analyzeMedicalReport = async (pdfFile: File): Promise<AnalysisResult> => {
@@ -101,7 +101,7 @@ export const analyzeMedicalReport = async (pdfFile: File): Promise<AnalysisResul
   }
 
   try {
-    console.log('🤖 Sending report to backend for Gemini analysis:', pdfFile.name);
+    console.log('🤖 Sending report to backend for Mistral analysis:', pdfFile.name);
     const base64Data = await fileToBase64(pdfFile);
 
     const response = await fetch(`${API_BASE_URL}/analyze`, {
@@ -116,7 +116,7 @@ export const analyzeMedicalReport = async (pdfFile: File): Promise<AnalysisResul
 
     if (response.status === 429) {
       setCooldown();
-      console.warn('⏳ Backend returned 429 — Gemini quota exhausted after retries.');
+      console.warn('⏳ Backend returned 429 — Mistral quota exhausted after retries.');
       const body = await response.json().catch(() => ({}));
       const waitSec = body.retryAfter || 65;
       return {

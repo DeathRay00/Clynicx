@@ -1,0 +1,29 @@
+# Core FastAPI stack (upgraded for CrewAI starlette compatibility)
+fastapi>=0.115.0
+uvicorn[standard]>=0.29.0
+starlette>=0.41.0
+
+# Auth & security
+python-jose[cryptography]==3.3.0
+bcrypt==4.1.3
+
+# DB
+psycopg2-binary==2.9.12
+pgvector>=0.2.5
+
+# PDF & HTTP
+pdfplumber>=0.11.0
+httpx>=0.27.0
+
+# Utilities
+python-dotenv>=1.0.1
+python-multipart==0.0.9
+numpy>=1.26.4
+
+# AI — existing providers
+groq>=1.0.0
+
+# ── CrewAI Multi-Agent Framework ─────────────────────────────────────────────
+# CrewAI v1.x with LiteLLM for Groq integration (no langchain-groq needed)
+crewai>=1.0.0
+litellm>=1.59.0

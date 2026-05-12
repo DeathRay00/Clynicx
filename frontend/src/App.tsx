@@ -15,6 +15,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 import { Toaster } from './components/ui/sonner';
 import { DemoModeBanner } from './components/DemoModeBanner';
+import { ChatbotWidget } from './components/chatbot/ChatbotWidget';
 
 function AuthenticatedApp() {
   const { user, loading } = useAuth();
@@ -112,6 +113,9 @@ function AuthenticatedApp() {
           </div>
         </main>
       </div>
+
+      {/* Multi-Agent Medical Chatbot — always visible */}
+      <ChatbotWidget />
     </div>
   );
 }

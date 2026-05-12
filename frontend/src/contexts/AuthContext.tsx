@@ -100,6 +100,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (response.ok) {
         const userData = await response.json();
         console.log('✅ User profile loaded from PostgreSQL backend');
+        disableDemoMode();
         setUser(userData);
         return;
       }
@@ -151,6 +152,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
         if (result.user) {
           console.log('✅ Logged in via PostgreSQL backend');
+          disableDemoMode();
           setUser(result.user);
         } else {
           await fetchUserProfile(result.token);
@@ -194,6 +196,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           saveToken(result.token);
         }
         if (result.user) {
+          disableDemoMode();
           setUser(result.user);
           return { success: true };
         }

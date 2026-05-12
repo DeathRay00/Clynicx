@@ -56,7 +56,7 @@ export const API_ENDPOINTS = {
     DOCTOR: `${API_BASE_URL}/doctor/reports`,
   },
 
-  // AI Report Analysis (proxied through backend — Gemini key stays server-side)
+  // AI Report Analysis (proxied through backend — Mistral key stays server-side)
   ANALYZE: `${API_BASE_URL}/analyze`,
 
   // Patients (Doctor-side)
@@ -64,6 +64,15 @@ export const API_ENDPOINTS = {
     LIST: `${API_BASE_URL}/doctor/patients`,
     BY_ID: (id: string) => `${API_BASE_URL}/doctor/patients/${id}`,
     ADD_PRESCRIPTION: (id: string) => `${API_BASE_URL}/doctor/patients/${id}/prescriptions`,
+  },
+
+  // Chatbot (Multi-Agent: Groq + Mistral RAG)
+  CHATBOT: {
+    SESSION: `${API_BASE_URL}/chatbot/session`,
+    MESSAGE: `${API_BASE_URL}/chatbot/message`,
+    HISTORY: `${API_BASE_URL}/chatbot/history`,
+    CONSENT: `${API_BASE_URL}/chatbot/consent`,
+    CLEAR:   `${API_BASE_URL}/chatbot/clear`,
   },
 
   // Initialization & Testing
@@ -128,7 +137,7 @@ export const FEATURES = {
 // AI Services Configuration — key is now on the backend only
 // This object is kept for backward compatibility but the key is no longer used client-side.
 export const AI_CONFIG = {
-  GEMINI_MODEL: 'gemini-2.0-flash',
+  MISTRAL_MODEL: 'mistral-large-latest',
 };
 
 export default API_ENDPOINTS;
